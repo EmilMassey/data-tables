@@ -24,3 +24,30 @@
 
     {{ parent() }}
 {% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+
+    <script>
+        window.addEventListener('DOMContentLoaded', () => {
+            const allUsersCheckbox = document.querySelector('.all-users-checkbox')
+            const usersCheckboxGroup = document.querySelector('.users-checkbox-group')
+
+            if (allUsersCheckbox && usersCheckboxGroup) {
+                const updateUsersCheckboxGroupVisiblity = () => {
+                    if (allUsersCheckbox.checked) {
+                        usersCheckboxGroup.classList.add('d-none')
+                    } else {
+                        usersCheckboxGroup.classList.remove('d-none')
+                    }
+                }
+
+                updateUsersCheckboxGroupVisiblity()
+
+                allUsersCheckbox.addEventListener('change', () => {
+                    updateUsersCheckboxGroupVisiblity()
+                })
+            }
+        })
+    </script>
+{% endblock %}

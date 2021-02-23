@@ -37,6 +37,10 @@ class TableController extends AbstractController
             throw $this->createNotFoundException();
         }
 
+        if (!$this->isGranted('ROLE_ADMIN') && !\in_array($this->getUser(), $table->getUsers(), true)) {
+            throw $this->createAccessDeniedException();
+        }
+
         return $this->render('table/show.html.twig', [
             'name' => $table->getName(),
             'content' => $this->reader->read($table->getFilePath()),

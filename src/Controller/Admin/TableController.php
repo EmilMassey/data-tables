@@ -2,10 +2,13 @@
 
 namespace App\Controller\Admin;
 
+use App\Command\ChangeTableName;
 use App\Command\CreateTable;
 use App\Command\DeleteTable;
+use App\Command\SetTableUsers;
 use App\Form\CreateTableForm;
 use App\Form\DTO\Table;
+use App\Form\EditTableForm;
 use App\Repository\TableRepositoryInterface;
 use App\Uploader\TableUploader;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -79,6 +82,37 @@ class TableController extends AbstractController
         }
 
         return $this->render('admin/table/create.html.twig', [
+            'form' => $form->createView(),
+        ]);
+    }
+
+    /**
+     * @Route("/{id}/edit", name="admin_table_edit")
+     */
+    public function editTable(string $id, Request $request): Response
+    {
+        if (null === $table = $this->tableRepository->get($id)) {
+            throw $this->createNotFoundException();
+        }
+
+        $tableDto = Table::createFromEntity($table);
+        $form = $this->createForm(EditTableForm::class, $tableDto);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $this->messageBus->dispatch(new ChangeTableName($id, $tableDto->name));
+            $this->messageBus->dispatch(new SetTableUsers($id, $tableDto->users->users));
+
+            $this->addFlash(
+                'success',
+                \sprintf('Zmieniono tabelę %s.', $tableDto->name)
+            );
+
+            return $this->redirectToRoute('admin_table_list');
+        }
+
+        return $this->render('admin/table/edit.html.twig', [
+            'table' => $table,
             'form' => $form->createView(),
         ]);
     }

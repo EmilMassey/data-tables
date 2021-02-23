@@ -10,4 +10,7 @@ interface UserRepositoryInterface
 
     /** @return UserInterface[] */
     public function getAll(): array;
+
+    /** @return UserInterface[] */
+    public function getAllNonAdmins(): array;
 }

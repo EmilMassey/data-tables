@@ -4,14 +4,13 @@ namespace App\Form;
 
 use App\Form\DTO\Table;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\Valid;
 
-class CreateTableForm extends AbstractType
+class EditTableForm extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
@@ -19,18 +18,12 @@ class CreateTableForm extends AbstractType
             ->add('name', TextType::class, [
                 'label' => 'Nazwa tabeli',
             ])
-            ->add('file', FileType::class, [
-                'label' => 'Plik',
-                'attr' => [
-                    'accept' => 'text/csv',
-                ],
-            ])
             ->add('users', TableUsersForm::class, [
                 'label' => false,
                 'constraints' => [new Valid()],
             ])
             ->add('submit', SubmitType::class, [
-                'label' => 'Dodaj tabelę',
+                'label' => 'Uaktualnij tabelę',
             ]);
     }
 

@@ -28,4 +28,9 @@ class UserRepository implements UserRepositoryInterface
     {
         return $this->repository->findBy([], ['admin' => 'DESC', 'email' => 'ASC']);
     }
+
+    public function getAllNonAdmins(): array
+    {
+        return $this->repository->findBy(["admin" => false], ['email' => 'ASC']);
+    }
 }
