@@ -53,7 +53,7 @@ class LoginAuthenticator extends AbstractLoginFormAuthenticator
             return new RedirectResponse($targetPath);
         }
 
-        return new RedirectResponse($this->urlGenerator->generate('admin_user_list'));
+        return new RedirectResponse($this->urlGenerator->generate('admin_table_list'));
     }
 
     protected function getLoginUrl(Request $request): string
