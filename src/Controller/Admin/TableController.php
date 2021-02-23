@@ -71,7 +71,9 @@ class TableController extends AbstractController
             $this->tableUploader->setFilename($table->name);
             $filepath = $this->tableUploader->upload($table->file);
 
-            $this->messageBus->dispatch(new CreateTable(Uuid::v4(), $table->name, $filepath));
+            $id = Uuid::v4();
+            $this->messageBus->dispatch(new CreateTable($id, $table->name, $filepath));
+            $this->messageBus->dispatch(new SetTableUsers($id, $table->users->users));
 
             $this->addFlash(
                 'success',
