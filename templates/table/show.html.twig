@@ -1,0 +1,50 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/jquery-footable/3.1.6/footable.bootstrap.min.css"
+          integrity="sha512-3kAToXGLroNvC/4WUnxTIPnfsiaMlCn0blp0pl6bmR9X6ibIiBZAi9wXmvpmg1cTyd2CMrxnMxqj7D12Gn5rlw=="
+          crossorigin="anonymous"/>
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet">
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-footable/3.1.6/footable.min.js"
+            integrity="sha512-aVkYzM2YOmzQjeGEWEU35q7PkozW0vYwEXYi0Ko06oVC4NdNzALflDEyqMB5/wB4wH50DmizI1nLDxBE6swF3g=="
+            crossorigin="anonymous"></script>
+{% endblock %}
+
+{% block title %}{{ name }}{% endblock %}
+
+{% block content %}
+    <h1>{{ name }}</h1>
+
+    <div class="table-responsive">
+        <table class="table" data-sorting="true" data-filtering="true" data-paging="true" data-state="true">
+            <thead>
+            <tr>
+                {% for column in content.header %}
+                    <th>{{ column }}</th>
+                {% endfor %}
+            </tr>
+            </thead>
+            <tbody>
+            {% for row in content.rows %}
+                <tr>
+                    {% for column in row %}
+                        <td>{{ column }}</td>
+                    {% endfor %}
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        jQuery(function ($) {
+            $('.table').footable();
+        });
+    </script>
+{% endblock %}

@@ -10,7 +10,9 @@
             {% for table in tables %}
                 <tr>
                     <td>
-                        {{ table.name }} <small>({{ table.id }})</small>
+                        <a href="{{ url('table_show', {'id': table.id}) }}">
+                            {{ table.name }} <small>({{ table.id }})</small>
+                        </a>
                     </td>
                     <td class="text-right">
                         <form action="{{ url('admin_table_delete', {'id': table.id}) }}" method="POST" class="d-inline">

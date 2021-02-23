@@ -26,3 +26,4 @@ security:
 
     access_control:
         - { path: ^/admin, roles: ROLE_ADMIN }
+        - { path: ^/table, roles: ROLE_USER }
