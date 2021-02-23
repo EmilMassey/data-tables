@@ -1,0 +1,21 @@
+version: '3'
+
+services:
+  web:
+    image: registry.empressia.pl/docker/php:7.4-apache
+    environment:
+      APACHE_DOCUMENT_ROOT: /var/www/html/public
+    depends_on:
+      - db
+    volumes:
+      - .:/var/www/html
+    ports:
+    - 80:80
+
+  db:
+    image: mysql:5.7
+    environment:
+      MYSQL_RANDOM_ROOT_PASSWORD: "yes"
+      MYSQL_USER: db_user
+      MYSQL_PASSWORD: db_password
+      MYSQL_DATABASE: db_name
