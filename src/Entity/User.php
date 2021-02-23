@@ -7,6 +7,7 @@ use Webmozart\Assert\Assert;
 
 /**
  * @ORM\Entity()
+ * @ORM\Table(name="users")
  */
 class User implements UserInterface
 {
