@@ -2,6 +2,7 @@
 
 namespace App\Security;
 
+use App\Entity\UserInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -53,7 +54,13 @@ class LoginAuthenticator extends AbstractLoginFormAuthenticator
             return new RedirectResponse($targetPath);
         }
 
-        return new RedirectResponse($this->urlGenerator->generate('admin_table_list'));
+        $user = $token->getUser();
+
+        if ($user instanceof UserInterface && $user->isAdmin()) {
+            return new RedirectResponse($this->urlGenerator->generate('admin_table_list'));
+        } else {
+            return new RedirectResponse($this->urlGenerator->generate('table_list'));
+        }
     }
 
     protected function getLoginUrl(Request $request): string

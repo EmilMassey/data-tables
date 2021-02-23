@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block content %}
+    {% if tables is empty %}
+        <div class="alert alert-warning">
+            Nie masz dostępu do żadnych tabel.
+        </div>
+    {% else %}
+        <table class="table table-striped">
+            {% for table in tables %}
+                <tr>
+                    <td>
+                        <a href="{{ url('table_show', {'id': table.id}) }}">
+                            {{ table.name }}
+                        </a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </table>
+    {% endif %}
+{% endblock %}
+

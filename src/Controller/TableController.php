@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\CSV\ReaderInterface;
+use App\Entity\UserInterface;
 use App\Repository\TableRepositoryInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -26,6 +27,24 @@ class TableController extends AbstractController
     {
         $this->repository = $repository;
         $this->reader = $reader;
+    }
+
+    /**
+     * @Route("/", name="table_list")
+     */
+    public function list(): Response
+    {
+        if ($this->isGranted('ROLE_ADMIN')) {
+            return $this->redirectToRoute('admin_table_list');
+        }
+
+        /** @var UserInterface $user */
+        $user = $this->getUser();
+        $tables = $this->repository->getAllByUser($user);
+
+        return $this->render('table/list.html.twig', [
+            'tables' => $tables,
+        ]);
     }
 
     /**

@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\TableInterface;
+use App\Entity\UserInterface;
 
 interface TableRepositoryInterface
 {
@@ -10,4 +11,7 @@ interface TableRepositoryInterface
 
     /** @return TableInterface[] */
     public function getAll(): array;
+
+    /** @return TableInterface[] */
+    public function getAllByUser(UserInterface $user): array;
 }
