@@ -31,5 +31,7 @@ class DeleteTableHandler implements MessageHandlerInterface
         }
 
         $this->entityManager->remove($table);
+
+        @unlink($table->getFilePath());
     }
 }

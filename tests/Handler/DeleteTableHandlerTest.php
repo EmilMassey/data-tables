@@ -48,4 +48,24 @@ class DeleteTableHandlerTest extends TestCase
 
         $handler(new DeleteTable('b9df4794-268b-499c-9fea-b4e4f5bcb2ef'));
     }
+
+    public function test_deletes_file()
+    {
+        $path = sys_get_temp_dir() . '/test.csv';
+        touch($path);
+
+        $table = new Table('b9df4794-268b-499c-9fea-b4e4f5bcb2ef', 'test', $path);
+
+        $repository = $this->getMockBuilder(TableRepositoryInterface::class)->getMock();
+        $repository
+            ->method('get')
+            ->willReturn($table);
+        $entityManager = $this->getMockBuilder(EntityManagerInterface::class)->getMock();
+
+        $handler = new DeleteTableHandler($repository, $entityManager);
+
+        $handler(new DeleteTable('b9df4794-268b-499c-9fea-b4e4f5bcb2ef'));
+
+        $this->assertFileNotExists($path);
+    }
 }
