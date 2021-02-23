@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller;
+namespace App\Controller\Admin;
 
 use App\Command\ChangeUserPassword;
 use App\Command\CreateUser;
@@ -18,9 +18,9 @@ use Symfony\Component\Messenger\MessageBusInterface;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Route("/admin")
+ * @Route("/admin/user")
  */
-class AdminController extends AbstractController
+class UserController extends AbstractController
 {
     /**
      * @var MessageBusInterface
@@ -46,7 +46,7 @@ class AdminController extends AbstractController
     }
 
     /**
-     * @Route("/user", name="admin_user_list", methods={"GET"})
+     * @Route("/", name="admin_user_list", methods={"GET"})
      */
     public function listUsers(): Response
     {
@@ -63,7 +63,7 @@ class AdminController extends AbstractController
     }
 
     /**
-     * @Route("/user/create", name="admin_user_create")
+     * @Route("/create", name="admin_user_create")
      */
     public function createUser(Request $request): Response
     {
@@ -93,7 +93,7 @@ class AdminController extends AbstractController
     }
 
     /**
-     * @Route("/user/{email}/reset-password", name="admin_user_reset-password", methods={"POST"})
+     * @Route("/{email}/reset-password", name="admin_user_reset-password", methods={"POST"})
      */
     public function resetUserPassword(string $email, Request $request): RedirectResponse
     {
@@ -117,7 +117,7 @@ class AdminController extends AbstractController
     }
 
     /**
-     * @Route("/user/{email}/delete", name="admin_user_delete", methods={"POST"})
+     * @Route("/{email}/delete", name="admin_user_delete", methods={"POST"})
      */
     public function deleteUser(string $email, Request $request): RedirectResponse
     {

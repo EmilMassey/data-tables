@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block content %}
+    {% if tables is empty %}
+        <div class="alert alert-warning">
+            Brak tabel. <a href="{{ url('admin_table_create') }}">Dodaj tabelę.</a>
+        </div>
+    {% else %}
+        <table class="table table-striped">
+            {% for table in tables %}
+                <tr>
+                    <td>
+                        {{ table.name }} <small>({{ table.id }})</small>
+                    </td>
+                    <td class="text-right">
+                        <form action="{{ url('admin_table_delete', {'id': table.id}) }}" method="POST" class="d-inline">
+                            <input type="hidden" name="_csrf_token" value="{{ csrf_token('table.delete') }}"/>
+                            <button type="submit" class="btn btn-sm btn-danger">
+                                Usuń
+                            </button>
+                        </form>
+                    </td>
+                </tr>
+            {% endfor %}
+        </table>
+
+        <a href="{{ url('admin_table_create') }}">Dodaj tabelę</a>
+    {% endif %}
+{% endblock %}
+

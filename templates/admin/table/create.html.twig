@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block content %}
+    <div class="alert alert-info">
+        Akceptowany format pliku to CSV. Pierwszy wiersz musi zawierać tytuły kolumn.
+    </div>
+
+    {{ form(form) }}
+
+    <a href="{{ url('admin_table_list') }}">Powrót do listy</a>
+{% endblock %}
