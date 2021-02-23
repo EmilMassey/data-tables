@@ -11,7 +11,7 @@
                 <tr>
                     <td>
                         {{ user.email }}
-                        {% if user.admin %}(administrator){% endif %}
+                        {% if user.admin %}<span class="badge badge-info">administrator</span>{% endif %}
                     </td>
                     <td class="text-right">
                         <form action="{{ url('admin_user_reset-password', {'email': user.email}) }}" method="POST" class="d-inline">
