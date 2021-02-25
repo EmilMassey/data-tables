@@ -46,3 +46,11 @@ or inside view templates extending the base template (if you want to use some st
      <link rel="stylesheet" href="css/subpage.css">
  {% endblock %}
 ```
+
+## Mail Notifications
+User receives an e-mail when:
+- their account has been created
+- they have been granted access to a table
+
+If you use `docker-compose.yaml` filed included in this repository, you can see your emails
+on http://localhost:8025. This is thanks to [MailHog](https://github.com/mailhog/MailHog) service.

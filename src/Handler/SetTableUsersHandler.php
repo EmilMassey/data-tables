@@ -3,8 +3,9 @@
 namespace App\Handler;
 
 use App\Command\SetTableUsers;
+use App\Entity\TableInterface;
 use App\Entity\UserInterface;
-use App\Event\UserEvent;
+use App\Event\UserHasBeenGrantedAccessToTableEvent;
 use App\Events;
 use App\Repository\TableRepositoryInterface;
 use App\Repository\UserRepositoryInterface;
@@ -34,6 +35,10 @@ class SetTableUsersHandler implements MessageHandlerInterface
      * @var UserInterface[]
      */
     private $usersGrantedAccess = [];
+    /**
+     * @var TableInterface
+     */
+    private $table;
 
     public function __construct(
         TableRepositoryInterface $tableRepository,
@@ -53,8 +58,8 @@ class SetTableUsersHandler implements MessageHandlerInterface
             throw new \InvalidArgumentException(\sprintf('Table %s does not exist', $command->id()));
         }
 
+        $this->table = $table;
         $previousUsers = $table->getUsers();
-
         $table->clearUsers();
 
         foreach ($command->users() as $user) {
@@ -77,7 +82,10 @@ class SetTableUsersHandler implements MessageHandlerInterface
     private function dispatchEvents(): void
     {
         foreach ($this->usersGrantedAccess as $user) {
-            $this->eventDispatcher->dispatch(new UserEvent($user), Events::USER_ACCESS_TO_TABLE_GRANTED);
+            $this->eventDispatcher->dispatch(
+                new UserHasBeenGrantedAccessToTableEvent($user, $this->table),
+                Events::USER_ACCESS_TO_TABLE_GRANTED
+            );
         }
     }
 }

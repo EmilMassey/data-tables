@@ -9,7 +9,7 @@ class UserEvent
     /**
      * @var UserInterface
      */
-    private $user;
+    protected $user;
 
     public function __construct(UserInterface $user)
     {
