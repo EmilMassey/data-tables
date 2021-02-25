@@ -1,9 +1,9 @@
 {% extends 'admin/base.html.twig' %}
 
 {% block content %}
-    <h1>Edytuj tabelę "{{ table.name }}"</h1>
+    <h1>{{ 'admin.edit_table'|trans({'table': table.name}) }}</h1>
 
     {{ form(form) }}
 
-    <a href="{{ url('admin_table_list') }}">Powrót do listy</a>
+    <a href="{{ url('admin_table_list') }}">{{ 'return_to_list'|trans }}</a>
 {% endblock %}

@@ -16,14 +16,14 @@ class EditTableForm extends AbstractType
     {
         $builder
             ->add('name', TextType::class, [
-                'label' => 'Nazwa tabeli',
+                'label' => 'admin.table_name',
             ])
             ->add('users', TableUsersForm::class, [
                 'label' => false,
                 'constraints' => [new Valid()],
             ])
             ->add('submit', SubmitType::class, [
-                'label' => 'Uaktualnij tabelę',
+                'label' => 'admin.edit',
             ]);
     }
 
