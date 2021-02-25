@@ -38,7 +38,7 @@ class Table implements TableInterface
      * @var Collection|UserInterface[]
      *
      * @ORM\ManyToMany(targetEntity="App\Entity\User")
-     * @ORM\JoinTable(inverseJoinColumns={@ORM\JoinColumn(name="user_email", referencedColumnName="email")})
+     * @ORM\JoinTable(inverseJoinColumns={@ORM\JoinColumn(name="user_email", referencedColumnName="email", onDelete="CASCADE")})
      */
     private $users;
 
