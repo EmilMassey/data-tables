@@ -65,3 +65,8 @@ Subjects are translatable, so you can modify them like other texts in [yaml file
 #### More
 If you want to have more control on what emails look like, check out [App\MailNotification](src/MailNotification) 
 namespace where e-mail notifications logic is defined.
+
+### Translations
+All texts displated to the User are supposed to be translatable. 
+You can edit translations by modifying [YAML files](translations). You can read more on how to create robust translations
+on [Symfony Documentation](https://symfony.com/doc/current/translation/message_format.html).
