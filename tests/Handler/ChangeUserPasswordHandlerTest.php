@@ -29,7 +29,6 @@ class ChangeUserPasswordHandlerTest extends TestCase
         $handler = new ChangeUserPasswordHandler($repository, $entityManager, $encoder);
 
         $handler(new ChangeUserPassword('email@example.com', 'test123'));
-
     }
 
     public function test_encodes_password()

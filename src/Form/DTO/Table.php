@@ -32,7 +32,7 @@ final class Table
 
     public static function createFromEntity(TableInterface $table): self
     {
-        $self = new self;
+        $self = new self();
         $self->name = $table->getName();
         $self->users = new TableUsers();
 
