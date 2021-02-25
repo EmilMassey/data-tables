@@ -16,7 +16,7 @@ class TableUploaderTest extends TestCase
 
     public function setUp(): void
     {
-        $this->targetDirectory = sys_get_temp_dir() . '/uploader';
+        $this->targetDirectory = sys_get_temp_dir().'/uploader';
         @mkdir($this->targetDirectory);
     }
 
@@ -24,7 +24,7 @@ class TableUploaderTest extends TestCase
     {
         $files = array_diff(scandir($this->targetDirectory), ['.', '..']);
         foreach ($files as $file) {
-            @unlink($this->targetDirectory . '/' . $file);
+            @unlink($this->targetDirectory.'/'.$file);
         }
         @rmdir($this->targetDirectory);
     }
@@ -70,8 +70,8 @@ class TableUploaderTest extends TestCase
 
     private static function createTempCsvFile(): string
     {
-        $path = sys_get_temp_dir() . '/' . uniqid() . '.csv';
-        copy(__DIR__ . '/../assets/sample.csv', $path);
+        $path = sys_get_temp_dir().'/'.uniqid().'.csv';
+        copy(__DIR__.'/../assets/sample.csv', $path);
 
         return $path;
     }

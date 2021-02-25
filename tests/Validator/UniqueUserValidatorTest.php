@@ -137,7 +137,7 @@ class UniqueUserValidatorTest extends TestCase
 
     public function test_throw_when_private_property()
     {
-        $object = new class {
+        $object = new class() {
             private $email = 'email@example.com';
         };
 
@@ -158,7 +158,7 @@ class UniqueUserValidatorTest extends TestCase
 
     public function test_violate_on_getter()
     {
-        $object = new class {
+        $object = new class() {
             public function getEmail(): string
             {
                 return 'email@example.com';

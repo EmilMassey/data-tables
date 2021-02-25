@@ -2,7 +2,6 @@
 
 namespace App\Form;
 
-use App\Form\DataMapper\TableUsersDataMapper;
 use App\Form\DTO\TableUsers;
 use App\Repository\UserRepositoryInterface;
 use Symfony\Component\Form\AbstractType;

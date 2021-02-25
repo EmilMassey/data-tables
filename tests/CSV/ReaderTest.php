@@ -29,7 +29,7 @@ class ReaderTest extends TestCase
         $this->expectExceptionMessageMatches('/File ".*\/empty.csv" is empty$/');
 
         $reader = new Reader();
-        $reader->read(__DIR__ . '/../assets/empty.csv');
+        $reader->read(__DIR__.'/../assets/empty.csv');
     }
 
     public function test_throw_if_file_not_csv_extension()

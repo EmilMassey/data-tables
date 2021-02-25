@@ -46,7 +46,7 @@ class TableUploader implements FileUploaderInterface
 
         $file->move($this->uploadDirectory, $path);
 
-        return $this->uploadDirectory . '/' . $path;
+        return $this->uploadDirectory.'/'.$path;
     }
 
     public function setFilename(string $filename): void
