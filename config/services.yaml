@@ -4,6 +4,8 @@
 # Put parameters here that don't need to change on each machine where the app is deployed
 # https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
+    email_from: '%env(EMAIL_FROM)%'
+    site_url: '%env(SITE_URL)%'
 
 services:
     # default configuration for services in *this* file
@@ -26,6 +28,16 @@ services:
     App\Controller\:
         resource: '../src/Controller/'
         tags: ['controller.service_arguments']
+
+    App\MailNotification\NotifyUserOnCreate:
+        arguments: ['%email_from%', '%site_url%']
+        tags:
+            - { name: kernel.event_listener, event: user.created }
+
+    App\MailNotification\NotifyUserOnTableAccess:
+        arguments: ['%email_from%', '%site_url%']
+        tags:
+            - { name: kernel.event_listener, event: user.access_to_table_granted }
 
     App\Uploader\TableUploader:
         arguments:

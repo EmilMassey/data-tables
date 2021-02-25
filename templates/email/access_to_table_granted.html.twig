@@ -1,0 +1,5 @@
+{% extends 'email/base.html.twig' %}
+
+{% block content %}
+    {{ 'mail_notification.access_to_table_granted.content'|trans({'url': siteUrl, 'name': table.name}) }}
+{% endblock %}

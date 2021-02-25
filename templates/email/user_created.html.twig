@@ -1,0 +1,9 @@
+{% extends 'email/base.html.twig' %}
+
+{% block content %}
+    {% if user.admin %}
+        {{ 'mail_notification.user_created.content_admin'|trans({'url': siteUrl}) }}
+    {% else %}
+        {{ 'mail_notification.user_created.content_regular'|trans({'url': siteUrl}) }}
+    {% endif %}
+{% endblock %}

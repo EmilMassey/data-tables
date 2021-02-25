@@ -41,3 +41,11 @@ email: E-mail
 password: Password
 logged_in_as: Logged in as {username}
 return_to_list: Return to list
+mail_notification:
+  user_created:
+    subject: 'Your account has been created'
+    content_regular: 'Your account has been created! You can now access data tables on {url}.'
+    content_admin: 'Your account has been created! You can add new data tables on {url}.'
+  access_to_table_granted:
+    subject: 'You have been granted access to data table'
+    content: 'You have been granted access to table "{name}". You can access tables on {url}.'
