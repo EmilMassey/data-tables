@@ -3,7 +3,6 @@
 namespace App\Validator;
 
 use App\Repository\UserRepositoryInterface;
-use Symfony\Component\Form\Exception\AccessException;
 use Symfony\Component\PropertyAccess\PropertyAccessorInterface;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;

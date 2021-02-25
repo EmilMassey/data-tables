@@ -153,7 +153,7 @@ class SetTableUsersHandlerTest extends TestCase
         $eventDispatcher = new EventDispatcher();
         $eventDispatcher->addListener(
             Events::USER_ACCESS_TO_TABLE_GRANTED,
-            function(UserEvent $event) use (&$usersGrantedAccess) {
+            function (UserEvent $event) use (&$usersGrantedAccess) {
                 $usersGrantedAccess[] = $event->user();
             }
         );
@@ -192,7 +192,7 @@ class SetTableUsersHandlerTest extends TestCase
         $eventDispatcher = new EventDispatcher();
         $eventDispatcher->addListener(
             Events::USER_ACCESS_TO_TABLE_GRANTED,
-            function(UserEvent $event) use (&$usersGrantedAccess) {
+            function (UserEvent $event) use (&$usersGrantedAccess) {
                 $usersGrantedAccess[] = $event->user();
             }
         );

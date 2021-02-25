@@ -53,6 +53,7 @@ class TableController extends AbstractController
         $this->tableUploader = $tableUploader;
         $this->translator = $translator;
     }
+
     /**
      * @Route("/", name="admin_table_list", methods={"GET"})
      */

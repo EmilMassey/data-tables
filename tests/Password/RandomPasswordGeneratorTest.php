@@ -12,7 +12,7 @@ class RandomPasswordGeneratorTest extends TestCase
         $generator = new RandomPasswordGenerator();
         $length = 10;
 
-        for ($i = 0; $i < 100; $i++) {
+        for ($i = 0; $i < 100; ++$i) {
             $password = $generator->generate($length);
             $this->assertSame($length, \strlen($password));
         }

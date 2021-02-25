@@ -2,13 +2,10 @@
 
 namespace App\Handler;
 
-use App\Command\CreateUser;
 use App\Command\DeleteUser;
-use App\Entity\User;
 use App\Repository\UserRepositoryInterface;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
-use Symfony\Component\Security\Core\Encoder\PasswordEncoderInterface;
 
 class DeleteUserHandler implements MessageHandlerInterface
 {

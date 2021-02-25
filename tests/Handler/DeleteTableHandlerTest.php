@@ -51,7 +51,7 @@ class DeleteTableHandlerTest extends TestCase
 
     public function test_deletes_file()
     {
-        $path = sys_get_temp_dir() . '/test.csv';
+        $path = sys_get_temp_dir().'/test.csv';
         touch($path);
 
         $table = new Table('b9df4794-268b-499c-9fea-b4e4f5bcb2ef', 'test', $path);
