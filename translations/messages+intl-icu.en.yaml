@@ -26,8 +26,8 @@ admin:
     table_deleted: '"{table}" has been deleted ({id})'
     user_added: >-
       {type, select,
-          admin    {Administrator has been created. Password: {password}}
-          regular  {User has been created. Password: {password}}
+          admin  {Administrator has been created. Password: {password}}
+          other  {User has been created. Password: {password}}
       }
     password_changed: 'Password changed: {password}'
     user_deleted: User {username} has been deleted
