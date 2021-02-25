@@ -18,6 +18,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Messenger\MessageBusInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Uid\Uuid;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 /**
  * @Route("/admin/table")
@@ -36,15 +37,21 @@ class TableController extends AbstractController
      * @var TableUploader
      */
     private $tableUploader;
+    /**
+     * @var TranslatorInterface
+     */
+    private $translator;
 
     public function __construct(
         MessageBusInterface $messageBus,
         TableRepositoryInterface $tableRepository,
-        TableUploader $tableUploader
+        TableUploader $tableUploader,
+        TranslatorInterface $translator
     ) {
         $this->messageBus = $messageBus;
         $this->tableRepository = $tableRepository;
         $this->tableUploader = $tableUploader;
+        $this->translator = $translator;
     }
     /**
      * @Route("/", name="admin_table_list", methods={"GET"})
@@ -77,7 +84,9 @@ class TableController extends AbstractController
 
             $this->addFlash(
                 'success',
-                \sprintf('Dodano tabelę %s.', $table->name)
+                $this->translator->trans('admin.message.table_created', [
+                    'table' => $table->name,
+                ])
             );
 
             return $this->redirectToRoute('admin_table_list');
@@ -107,7 +116,9 @@ class TableController extends AbstractController
 
             $this->addFlash(
                 'success',
-                \sprintf('Zmieniono tabelę %s.', $tableDto->name)
+                $this->translator->trans('admin.message.table_changed', [
+                    'table' => $tableDto->name,
+                ])
             );
 
             return $this->redirectToRoute('admin_table_list');
@@ -136,7 +147,10 @@ class TableController extends AbstractController
 
         $this->addFlash(
             'success',
-            \sprintf('Usunięto tabelę "%s" (%s)', $table->getName(), $id)
+            $this->translator->trans('admin.message.table_deleted', [
+                'table' => $table->getName(),
+                'id' => $id,
+            ])
         );
 
         return $this->redirectToRoute('admin_table_list');

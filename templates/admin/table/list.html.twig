@@ -3,7 +3,7 @@
 {% block content %}
     {% if tables is empty %}
         <div class="alert alert-warning">
-            Brak tabel. <a href="{{ url('admin_table_create') }}">Dodaj tabelę.</a>
+            {{ 'admin.no_tables'|trans }}. <a href="{{ url('admin_table_create') }}">{{ 'admin.create_table'|trans }}.</a>
         </div>
     {% else %}
         <table class="table table-striped">
@@ -12,17 +12,17 @@
                     <td>
                         <a href="{{ url('table_show', {'id': table.id}) }}">
                             {{ table.name }} <small>({{ table.id }})</small>
-                            <span class="badge badge-info">{{ table.users|length }} użytkowników</span>
+                            <span class="badge badge-info">{{ 'admin.num_of_users'|trans({'users': table.users|length}) }}</span>
                         </a>
                     </td>
                     <td class="text-right">
                         <a href="{{ url('admin_table_edit', {'id': table.id}) }}" class="btn btn-sm btn-outline-primary">
-                            Edytuj
+                            {{ 'admin.edit'|trans }}
                         </a>
                         <form action="{{ url('admin_table_delete', {'id': table.id}) }}" method="POST" class="d-inline">
                             <input type="hidden" name="_csrf_token" value="{{ csrf_token('table.delete') }}"/>
                             <button type="submit" class="btn btn-sm btn-danger">
-                                Usuń
+                                {{ 'admin.delete' | trans }}
                             </button>
                         </form>
                     </td>
@@ -30,7 +30,7 @@
             {% endfor %}
         </table>
 
-        <a href="{{ url('admin_table_create') }}">Dodaj tabelę</a>
+        <a href="{{ url('admin_table_create') }}">{{ 'admin.create_table'|trans }}</a>
     {% endif %}
 {% endblock %}
 

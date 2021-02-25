@@ -3,7 +3,7 @@
 {% block content %}
     {% if users is empty %}
         <div class="alert alert-warning">
-            Brak użytkowników. <a href="{{ url('admin_user_create') }}">Dodaj użytkownika.</a>
+            {{ 'admin.no_users'|trans }}. <a href="{{ url('admin_user_create') }}">{{ 'admin.add_user'|trans }}.</a>
         </div>
     {% else %}
         <table class="table table-striped">
@@ -11,19 +11,19 @@
                 <tr>
                     <td>
                         {{ user.email }}
-                        {% if user.admin %}<span class="badge badge-info">administrator</span>{% endif %}
+                        {% if user.admin %}<span class="badge badge-info">{{ 'admin.administrator'|trans }}</span>{% endif %}
                     </td>
                     <td class="text-right">
                         <form action="{{ url('admin_user_reset-password', {'email': user.email}) }}" method="POST" class="d-inline">
                             <input type="hidden" name="_csrf_token" value="{{ csrf_token('user.reset_password') }}"/>
                             <button type="submit" class="btn btn-sm btn-outline-primary">
-                                Zmień hasło
+                                {{ 'admin.change_password'|trans }}
                             </button>
                         </form>
                         <form action="{{ url('admin_user_delete', {'email': user.email}) }}" method="POST" class="d-inline">
                             <input type="hidden" name="_csrf_token" value="{{ csrf_token('user.delete') }}"/>
                             <button type="submit" class="btn btn-sm btn-danger">
-                                Usuń
+                                {{ 'admin.delete'|trans }}
                             </button>
                         </form>
                     </td>
@@ -31,7 +31,7 @@
             {% endfor %}
         </table>
 
-        <a href="{{ url('admin_user_create') }}">Dodaj użytkownika</a>
+        <a href="{{ url('admin_user_create') }}">{{ 'admin.add_user'|trans }}</a>
     {% endif %}
 {% endblock %}
 

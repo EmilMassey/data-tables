@@ -16,6 +16,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Messenger\MessageBusInterface;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 /**
  * @Route("/admin/user")
@@ -34,15 +35,21 @@ class UserController extends AbstractController
      * @var UserRepositoryInterface
      */
     private $userRepository;
+    /**
+     * @var TranslatorInterface
+     */
+    private $translator;
 
     public function __construct(
         MessageBusInterface $messageBus,
         PasswordGeneratorInterface $passwordGenerator,
-        UserRepositoryInterface $userRepository
+        UserRepositoryInterface $userRepository,
+        TranslatorInterface $translator
     ) {
         $this->messageBus = $messageBus;
         $this->passwordGenerator = $passwordGenerator;
         $this->userRepository = $userRepository;
+        $this->translator = $translator;
     }
 
     /**
@@ -77,11 +84,10 @@ class UserController extends AbstractController
 
             $this->addFlash(
                 'success',
-                \sprintf(
-                    'Dodano %s. Hasło: %s',
-                    $user->admin ? 'Administratora' : 'Użytkownika',
-                    $password
-                )
+                $this->translator->trans('admin.message.user_added', [
+                    'type' => $user->admin ? 'admin' : 'regular',
+                    'password' => $password,
+                ])
             );
 
             return $this->redirectToRoute('admin_user_list');
@@ -110,7 +116,7 @@ class UserController extends AbstractController
 
         $this->addFlash(
             'success',
-            \sprintf('Zmieniono hasło: %s', $password)
+            $this->translator->trans('admin.message.password_changed', ['password' => $password])
         );
 
         return $this->redirectToRoute('admin_user_list');
@@ -133,7 +139,7 @@ class UserController extends AbstractController
 
         $this->addFlash(
             'success',
-            \sprintf('Usunięto użytkownika %s', $email)
+            $this->translator->trans('admin.message.user_deleted', ['username' => $email])
         );
 
         return $this->redirectToRoute('admin_user_list');

@@ -17,10 +17,10 @@ class CreateTableForm extends AbstractType
     {
         $builder
             ->add('name', TextType::class, [
-                'label' => 'Nazwa tabeli',
+                'label' => 'admin.table_name',
             ])
             ->add('file', FileType::class, [
-                'label' => 'Plik',
+                'label' => 'admin.file',
                 'attr' => [
                     'accept' => 'text/csv',
                 ],
@@ -30,7 +30,7 @@ class CreateTableForm extends AbstractType
                 'constraints' => [new Valid()],
             ])
             ->add('submit', SubmitType::class, [
-                'label' => 'Dodaj tabelę',
+                'label' => 'admin.create_table',
             ]);
     }
 

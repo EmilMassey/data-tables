@@ -1,0 +1,43 @@
+admin:
+  administrator: Administrator
+  table_name: Table name
+  file: File
+  create_table: Create table
+  add_user: Add user
+  edit: Edit
+  create: Create
+  delete: Delete
+  no_tables: There are no tables
+  no_users: There are no users
+  change_password: Change password
+  users_access: Users access
+  all_users_access: All users can access
+  edit_table: Edit table "{table}"
+  accepted_csv_file_format: 'Accepted file format: CSV with "," as separator. First row must contain column titles.'
+  num_of_users: >-
+    {users, plural,
+        =0    {0 users}
+        one   {1 user}
+        other {# users}
+    }
+  message:
+    table_created: Table "{table}" has been created
+    table_changed: '"{table}" has been updated'
+    table_deleted: '"{table}" has been deleted ({id})'
+    user_added: >-
+      {type, select,
+          admin    {Administrator has been created. Password: {password}}
+          regular  {User has been created. Password: {password}}
+      }
+    password_changed: 'Password changed: {password}'
+    user_deleted: User {username} has been deleted
+
+no_tables: You haven't got access to any table
+tables: Tables
+users: Users
+logout: Log out
+login: Log in
+email: E-mail
+password: Password
+logged_in_as: Logged in as {username}
+return_to_list: Return to list

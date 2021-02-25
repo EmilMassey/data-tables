@@ -29,14 +29,14 @@ class TableUsersForm extends AbstractType
     {
         $builder
             ->add('allUsers', CheckboxType::class, [
-                'label' => 'Dostęp przez każdego zalogowanego użytkownika',
+                'label' => 'admin.all_users_access',
                 'required' => false,
                 'attr' => [
                     'class' => 'all-users-checkbox',
                 ],
             ])
             ->add('users', ChoiceType::class, [
-                'label' => 'Dostęp użytkowników',
+                'label' => 'admin.users_access',
                 'choices' => $this->getChoices(),
                 'multiple' => true,
                 'expanded' => true,

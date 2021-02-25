@@ -3,5 +3,5 @@
 {% block content %}
     {{ form(form) }}
 
-    <a href="{{ url('admin_user_list') }}">Powrót do listy</a>
+    <a href="{{ url('admin_user_list') }}">{{ 'return_to_list'|trans }}</a>
 {% endblock %}
