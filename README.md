@@ -27,8 +27,8 @@ User receives an e-mail when:
 - their account has been created
 - they have been granted access to a table
 
-If you use `docker-compose.yaml` filed included in this repository, you can see your emails
-on http://localhost:8025. This is thanks to [MailHog](https://github.com/mailhog/MailHog) service.
+If you use `docker-compose.yaml` file included in this repository, you can see your emails
+on http://localhost:8025 without actually sending them. This is thanks to [MailHog](https://github.com/mailhog/MailHog) service.
 
 ## How to customize
 ### Edit layouts
@@ -43,7 +43,7 @@ like this:
 ```
  {% block stylesheets %}
      ...
-     <link rel="stylesheet" href="css/style.css">
+     <link rel="stylesheet" href="/css/style.css">
  {% endblock %}
 ```
 
@@ -51,7 +51,7 @@ or inside view templates extending the base template (if you want to use some st
 ```
 {% block stylesheets %}
      {{ parent() }}
-     <link rel="stylesheet" href="css/subpage.css">
+     <link rel="stylesheet" href="/css/subpage.css">
  {% endblock %}
 ```
 
@@ -67,6 +67,6 @@ If you want to have more control on what emails look like, check out [App\MailNo
 namespace where e-mail notifications logic is defined.
 
 ### Translations
-All texts displated to the User are supposed to be translatable. 
+All texts displayed to the User are supposed to be translatable. 
 You can edit translations by modifying [YAML files](translations). You can read more on how to create robust translations
 on [Symfony Documentation](https://symfony.com/doc/current/translation/message_format.html).
